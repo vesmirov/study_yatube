@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,11 +30,10 @@ SECRET_KEY = '=4dma*e4=sws@xwaq#h4h4m&xq4q40y9b#p3g&)#51=(9@rpkn'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "*",
+    "178.154.228.29",
     "localhost",
-    "127.0.0.1",
-    "[::1]",
-    "testserver",
+    "ayztuva.tk",
+    "www.ayztuva.tk",
 ]
 
 
@@ -95,12 +98,8 @@ WSGI_APPLICATION = 'yatube.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db(),
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
