@@ -30,10 +30,10 @@ SECRET_KEY = '=4dma*e4=sws@xwaq#h4h4m&xq4q40y9b#p3g&)#51=(9@rpkn'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "178.154.228.29",
     "localhost",
-    "ayztuva.tk",
-    "www.ayztuva.tk",
+    "127.0.0.1",
+    "[::1]",
+    "testserver",
 ]
 
 
@@ -67,10 +67,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
-
 ROOT_URLCONF = 'yatube.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
@@ -98,7 +94,10 @@ WSGI_APPLICATION = 'yatube.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # Password validation
