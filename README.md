@@ -1,1 +1,1 @@
-# hw05_final
+#Studying project from Yandex.Praktikum
