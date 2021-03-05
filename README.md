@@ -1,4 +1,4 @@
-# hw05_final
+# Yatube
 
 Social network for keeping personal records divided into groups; with the ability to comment and subscribe to other authors.  
 
