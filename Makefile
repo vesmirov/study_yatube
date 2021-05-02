@@ -13,7 +13,7 @@ migrate:
 collectstatic:
 	poetry run python manage.py collectstatic
 
-superuser:
+createsuperuser:
 	poetry run python manage.py createsuperuser
 
 lint:

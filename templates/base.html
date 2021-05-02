@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}The Last Social Media You'll Ever Need{% endblock %} | Yatube</title>
@@ -9,17 +8,17 @@
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-</head>
+  </head>
 
-<body>
-    {% include 'include/nav.html' %}
-    <main>
+  <body>
+      {% include 'include/nav.html' %}
+      <main>
         <div class="container">
-            <h1 class="container-fluid display-4">{% block header %}The Last Social Media You'll Ever Need{% endblock %}</h1><hr>
-            {% block content %}
-            {% endblock %}
+          <h1 class="container-fluid display-4">{% block header %}The Last Social Media You'll Ever Need{% endblock %}</h1><hr>
+          {% block content %}
+          {% endblock %}
         </div>
-    </main>
-    {% include 'include/footer.html' %}
-</body>
+      </main>
+      {% include 'include/footer.html' %}
+  </body>
 </html>
