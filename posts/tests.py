@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from io import BytesIO
 from PIL import Image
 
-from .models import User, Post, Group, Comment, Follow
+from .models import User, Post, Group, Follow
 
 test_data = {
     'username': 'test_user',
@@ -151,7 +151,10 @@ class TestImages(TestCase):
         self.client.force_login(self.user)
 
     def test_image_on_post_page(self):
-        self.post = Post.objects.create(text=test_data['text'], author=self.user)
+        self.post = Post.objects.create(
+            text=test_data['text'],
+            author=self.user
+        )
         with TemporaryDirectory() as temp_directory:
             with override_settings(MEDIA_ROOT=temp_directory):
                 byte_image = BytesIO()
@@ -159,9 +162,19 @@ class TestImages(TestCase):
                 im.save(byte_image, format='jpeg')
                 byte_image.seek(0)
 
-                params = {'username': self.user.username, 'post_id': self.post.id}
-                data = {'text': 'post with image', 'image': ContentFile(byte_image.read(), name='test.jpeg')}
-                response = self.client.post(reverse('post_edit', kwargs=params), data=data, follow=True)
+                params = {
+                    'username': self.user.username,
+                    'post_id': self.post.id
+                }
+                data = {
+                    'text': 'post with image',
+                    'image': ContentFile(byte_image.read(), name='test.jpeg')
+                }
+                response = self.client.post(
+                    reverse('post_edit', kwargs=params),
+                    data=data,
+                    follow=True
+                )
 
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, '<img')
@@ -183,13 +196,15 @@ class TestImages(TestCase):
                 )
                 urls = [
                     reverse('index'),
-                    reverse('profile', kwargs={'username': post.author.username}),
+                    reverse(
+                        'profile', kwargs={'username': post.author.username}),
                     reverse('group', kwargs={'slug': post.group.slug}),
                 ]
                 for url in urls:
                     response = self.client.get(url)
                     self.assertContains(response, '<img', html=False)
-                    self.assertEqual(response.context['page'][0].image, post.image)
+                    self.assertEqual(
+                        response.context['page'][0].image, post.image)
 
     def test_upload_format(self):
         img_bytes = (
@@ -206,15 +221,21 @@ class TestImages(TestCase):
             'group': self.group.id,
             'image': image
         }
-        error_text = "Формат файлов 'txt' не поддерживается. Поддерживаемые форматы файлов: '" \
-                     "bmp, dib, gif, tif, tiff, jfif, jpe, jpg, jpeg, pbm, pgm, ppm, pnm, png, apng, " \
-                     "blp, bufr, cur, pcx, dcx, dds, ps, eps, fit, fits, fli, flc, ftc, ftu, gbr, grib, " \
-                     "h5, hdf, jp2, j2k, jpc, jpf, jpx, j2c, icns, ico, im, iim, mpg, mpeg, mpo, msp, " \
-                     "palm, pcd, pdf, pxr, psd, bw, rgb, rgba, sgi, ras, tga, icb, vda, vst, webp, wmf, " \
-                     "emf, xbm, xpm'."
+        error_text = (
+            "Формат файлов 'txt' не поддерживается."
+            'Поддерживаемые форматы файлов: "'
+            'bmp, dib, gif, tif, tiff, jfif, jpe, jpg, jpeg, pbm, '
+            'pgm, ppm, pnm, png, apng, blp, bufr, cur, pcx, dcx, '
+            'dds, ps, eps, fit, fits, fli, flc, ftc, ftu, gbr, '
+            'grib, h5, hdf, jp2, j2k, jpc, jpf, jpx, j2c, icns, '
+            'ico, im, iim, mpg, mpeg, mpo, msp, palm, pcd, pdf, '
+            'pxr, psd, bw, rgb, rgba, sgi, ras, tga, icb, vda, '
+            'vst, webp, wmf, emf, xbm, xpm".'
+        )
 
         response = self.client.post(reverse('new_post'), data=post_data)
-        self.assertFormError(response, form='form', field='image', errors=error_text)
+        self.assertFormError(
+            response, form='form', field='image', errors=error_text)
 
 
 class TestCache(TestCase):

@@ -8,20 +8,19 @@ class PostForm(ModelForm):
         model = Post
         fields = ('text', 'group', 'image')
         labels = {
-            'text': 'Текст поста', 
-            'group': 'Группа', 
+            'text': 'Текст поста',
+            'group': 'Группа',
             'image': 'Изображение',
         }
-        error_messages = {'image': {'invalid': 'invalid type'}
+        error_messages = {
+            'image': {'invalid': 'invalid type'},
         }
-        help_texts = {'text': 'Добавьте текст',}
+        help_texts = {'text': 'Добавьте текст'}
 
 
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
-        labels = {
-            'text': 'Текст комментария',
-        }
+        labels = {'text': 'Текст комментария'}
         help_texts = {'text': 'Добавьте комментарий'}

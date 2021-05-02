@@ -1,11 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView
-from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from django.views.decorators.cache import cache_page
 
-from .models import User, Post, Group, Comment, Follow
+from .models import User, Post, Group, Follow
 from .forms import PostForm, CommentForm
 
 
@@ -103,7 +100,9 @@ def post_view(request, username, post_id):
         author=post.author
     ).exists()
 
-    return render(request, 'post.html',
+    return render(
+        request,
+        'post.html',
         {
             'author': post.author,
             'post': post,
@@ -116,7 +115,7 @@ def post_view(request, username, post_id):
 
 @login_required
 def add_comment(request, username, post_id):
-    post = get_object_or_404(Post, id=post_id, )
+    post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
         form.instance.author = request.user

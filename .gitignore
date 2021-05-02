@@ -4,8 +4,9 @@ env/
 venv/
 .venv
 .venv/
+.env
 
-# cacje
+# cache
 __pycache__/
 *.py[cod]
 
@@ -23,12 +24,15 @@ __pycache__/
 static/*
 posts/static/*
 media/*
+staticfiles/*
 !static/.gitkeep
 !posts/static/.gitkeep
 !media/.gitkeep
+!staticfiles/staticfiles.zip
 
 # db
 db.sqlite3
 
 # other
 dump.json
+.vscode
