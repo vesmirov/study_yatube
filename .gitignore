@@ -1,12 +1,15 @@
+# environment
 .git/*
 env/
 venv/
 .venv
 .venv/
 
+# cacje
 __pycache__/
 *.py[cod]
 
+# apple
 .idea
 .DS_Store
 ._.DS_Store
@@ -16,6 +19,7 @@ __pycache__/
 *.sublime-project
 *.sublime-workspace
 
+# media and static
 static/*
 posts/static/*
 media/*
@@ -23,5 +27,8 @@ media/*
 !posts/static/.gitkeep
 !media/.gitkeep
 
-
+# db
 db.sqlite3
+
+# other
+dump.json
