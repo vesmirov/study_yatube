@@ -15,6 +15,7 @@ urlpatterns = [
     path('about/', include('django.contrib.flatpages.urls')),
     path("auth/", include("users.urls")),
     path("auth/", include("django.contrib.auth.urls")),
+    path('api/', include('api.urls')),
     path(
         'about-author/',
         flat_views.flatpage,
@@ -27,15 +28,10 @@ urlpatterns = [
         {'url': '/about-spec/'},
         name='about-spec'
     ),
-    path(
-        'api-token-auth/',
-        rest_views.obtain_auth_token,
-        name='obtain_token'
-    )
 ]
 
 urlpatterns += [
-    path("", include("posts.urls")),
+    path('', include('posts.urls')),
 ]
 
 if settings.DEBUG:
