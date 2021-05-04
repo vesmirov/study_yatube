@@ -6,4 +6,5 @@ from . import views
 
 urlpatterns = [
     path('v1/api-token-auth/', apiviews.obtain_auth_token),
+    # path('v1/user/<str:username>/'),
 ]
