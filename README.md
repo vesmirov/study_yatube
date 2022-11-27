@@ -44,8 +44,8 @@ python manage.py runserver
 
 ## Author
 
-Evan Vilagov
+Evan Vesmirov
 
-Linkedin: https://www.linkedin.com/in/vilagov/
+Linkedin: https://www.linkedin.com/in/vesmirov/
 
-Email: evan.vilagov@gmail.com
+Email: evan.vesmirov@proton.me
